@@ -2,8 +2,10 @@ CryptoTracker Pro - Crypto Market Tracking Application
 Overview
 CryptoTracker Pro is a web application that provides real-time cryptocurrency market data, including prices, market caps, and historical trends. The application fetches data from the CoinRanking API and presents it in an intuitive interface with sorting, filtering, and detailed coin information.
 
+<img width="1918" height="896" alt="crypto-2" src="https://github.com/user-attachments/assets/1c3ea359-693a-4424-9fc2-37f4735d3b48" />
+<img width="1892" height="873" alt="crypto-1" src="https://github.com/user-attachments/assets/13130aa9-3c9e-4cea-9fc3-b419b057ac27" />
 
-./crypto-1.png
+
 
 Features
 Real-time cryptocurrency price tracking
