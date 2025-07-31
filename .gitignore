@@ -1,0 +1,43 @@
+# Node.js dependencies
+/node_modules/
+
+# Environment variables file
+.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker-related
+docker-compose.override.yml
+*.log
+
+# Build output
+/dist
+/build
+/out
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VSCode settings (if using VSCode)
+.vscode/
+
+# Optional: lock files if you want to ignore (usually better to commit them)
+/package-lock.json
+/yarn.lock
+
+# Coverage reports (if you add tests)
+/coverage/
+
+# IDE or Editor files
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Temporary files
+*.tmp
