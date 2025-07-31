@@ -1,120 +1,182 @@
-CryptoTracker Pro - Crypto Market Tracking Application
-Overview
-CryptoTracker Pro is a web application that provides real-time cryptocurrency market data, including prices, market caps, and historical trends. The application fetches data from the CoinRanking API and presents it in an intuitive interface with sorting, filtering, and detailed coin information.
+Here's a well-formatted version of your `README.md` for **CryptoTracker Pro**, organized using markdown best practices:
 
-<img width="1918" height="896" alt="crypto-2" src="https://github.com/user-attachments/assets/1c3ea359-693a-4424-9fc2-37f4735d3b48" />
-<img width="1892" height="873" alt="crypto-1" src="https://github.com/user-attachments/assets/13130aa9-3c9e-4cea-9fc3-b419b057ac27" />
+---
 
-DEMO VIDEO
-Link: https://youtu.be/uTbP4lnBDpk
+# CryptoTracker Pro - Crypto Market Tracking Application
 
-Features
-Real-time cryptocurrency price tracking
+CryptoTracker Pro is a responsive web application that delivers **real-time cryptocurrency market data**, including prices, market capitalization, and historical trends. It leverages the **CoinRanking API** and presents information through an intuitive and interactive interface.
 
-Detailed coin information with historical price charts
+## Screenshots
 
-Sorting and filtering capabilities
+![crypto-2](https://github.com/user-attachments/assets/1c3ea359-693a-4424-9fc2-37f4735d3b48)
+![crypto-1](https://github.com/user-attachments/assets/13130aa9-3c9e-4cea-9fc3-b419b057ac27)
 
-Light/dark theme toggle
+## 📽️ Demo Video
 
-Favorites system
+[🔗 Watch on YouTube](https://youtu.be/uTbP4lnBDpk)
 
-Responsive design for all device sizes
+---
 
-Docker Deployment
-Image Details
-Docker Hub Repository: rurangajabes/cryptotracker
+## Features
 
-Image Tags: latest, v1
+* Real-time cryptocurrency price tracking
+* Historical price charts for each coin
+* Sorting and filtering capabilities
+* Light/Dark theme toggle
+* Favorites system
+* Fully responsive for all device sizes
 
-Build Instructions
-To build the Docker image locally:
+---
 
-bash
+## Docker Deployment
+
+### Image Details
+
+* **Docker Hub Repository**: [`rurangajabes/cryptotracker`](https://hub.docker.com/r/rurangajabes/cryptotracker)
+* **Tags**: `latest`, `v1`
+
+### Build Instructions (Local)
+
+```bash
 docker build -t rurangajabes/cryptotracker:v1 .
-Run Locally
-To run the container locally for testing:
+```
 
-bash
+### Run Locally
+
+```bash
 docker run -p 8080:8080 -e API_KEY=your_api_key rurangajabes/cryptotracker:v1
-Verify it's working:
+```
 
-bash
+To verify:
+
+```bash
 curl http://localhost:8080
-Deployment on Lab Machines
-SSH into web-01 and web-02:
+```
 
-bash
-ssh ubuntu@localhost -p 2211  # web-01
-ssh ubuntu@localhost -p 2212  # web-02
-On each machine, pull and run the image:
+---
 
-bash
+## Deployment on Lab Machines
+
+### 1. SSH into the Machines
+
+```bash
+# Web Server 1
+ssh ubuntu@localhost -p 2211
+
+# Web Server 2
+ssh ubuntu@localhost -p 2212
+```
+
+### 2. Pull & Run the Docker Image
+
+```bash
 docker pull rurangajabes/cryptotracker:latest
+
 docker run -d --name app --restart unless-stopped \
   -p 8080:8080 \
   -e API_KEY=your_api_key \
   rurangajabes/cryptotracker:v1
-Verify each instance is reachable:
+```
 
-bash
+### 3. Verify Each Instance
+
+```bash
 curl http://web-01:8080
 curl http://web-02:8080
-Load Balancer Configuration
-SSH into lb-01:
+```
 
-bash
+---
+
+## Load Balancer Setup
+
+### 1. SSH into Load Balancer
+
+```bash
 ssh ubuntu@localhost -p 2210
-Update /etc/haproxy/haproxy.cfg with:
+```
 
-config
+### 2. Edit `/etc/haproxy/haproxy.cfg`
+
+```cfg
 backend webapps
   balance roundrobin
   server web01 172.20.0.11:8080 check
   server web02 172.20.0.12:8080 check
   http-response set-header X-Served-By %[srv_name]
-Reload HAProxy:
+```
 
-bash
+### 3. Reload HAProxy
+
+```bash
 haproxy -sf $(pidof haproxy) -f /etc/haproxy/haproxy.cfg
-Testing Load Balancing
-From your host machine:
+```
 
-bash
+### 4. Test Load Balancing
+
+```bash
 curl -I http://localhost:8082
-Make multiple requests and observe the X-Served-By header alternating between web01 and web02.
+```
 
-API Usage
-This application uses the CoinRanking API through a proxy server to:
+Make multiple requests and observe the `X-Served-By` header alternating between `web01` and `web02`.
 
-Fetch cryptocurrency listings
+---
 
-Get detailed coin information
+## API Usage
 
-Retrieve historical price data
+CryptoTracker Pro uses the **CoinRanking API** (through a proxy server) to:
 
-Security Considerations
-API keys are passed as environment variables to the container rather than being hardcoded in the application. For production use, consider using a secrets management solution.
+* Fetch cryptocurrency listings
+* Retrieve individual coin information
+* Fetch historical price data
 
-Development
-Prerequisites
-Node.js 16+
+**Note:** The API key is injected via environment variables.
 
-npm/yarn
+---
 
-Installation
-bash
+## Security Considerations
+
+* API keys are not hardcoded; they are passed as environment variables.
+* For production deployments, consider using a secrets management solution like **Vault**, **AWS Secrets Manager**, or **Docker secrets**.
+
+---
+
+## Development Setup
+
+### Prerequisites
+
+* **Node.js v16+**
+* **npm** or **yarn**
+
+### Installation
+
+```bash
 npm install
-Running Locally
-bash
+```
+
+### Run Locally
+
+```bash
 npm start
-The application will be available at http://localhost:8080
+```
 
-Troubleshooting
-If you encounter issues:
+Visit: [http://localhost:8080](http://localhost:8080)
 
-Verify the API key is correctly set as an environment variable
+---
 
-Check container logs with docker logs <container_id>
+## Troubleshooting
 
-Ensure ports are correctly mapped and not in use by other services
+* Ensure your API key is set correctly with `-e API_KEY=...`
+
+* View logs with:
+
+  ```bash
+  docker logs <container_id>
+  ```
+
+* Check that port `8080` is not already in use.
+
+---
+
+## License
+
+This project is for educational and demonstration purposes.
