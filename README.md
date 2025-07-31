@@ -1,7 +1,3 @@
-Here's a well-formatted version of your `README.md` for **CryptoTracker Pro**, organized using markdown best practices:
-
----
-
 # CryptoTracker Pro - Crypto Market Tracking Application
 
 CryptoTracker Pro is a responsive web application that delivers **real-time cryptocurrency market data**, including prices, market capitalization, and historical trends. It leverages the **CoinRanking API** and presents information through an intuitive and interactive interface.
@@ -11,9 +7,9 @@ CryptoTracker Pro is a responsive web application that delivers **real-time cryp
 ![crypto-2](https://github.com/user-attachments/assets/1c3ea359-693a-4424-9fc2-37f4735d3b48)
 ![crypto-1](https://github.com/user-attachments/assets/13130aa9-3c9e-4cea-9fc3-b419b057ac27)
 
-## 📽️ Demo Video
+## Demo Video
 
-[🔗 Watch on YouTube](https://youtu.be/uTbP4lnBDpk)
+[Watch on YouTube](https://youtu.be/uTbP4lnBDpk)
 
 ---
 
