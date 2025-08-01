@@ -1,178 +1,73 @@
 # CryptoTracker Pro - Crypto Market Tracking Application
 
-CryptoTracker Pro is a responsive web application that delivers **real-time cryptocurrency market data**, including prices, market capitalization, and historical trends. It leverages the **CoinRanking API** and presents information through an intuitive and interactive interface.
+![App Screenshot 1](https://github.com/user-attachments/assets/1c3ea359-693a-4424-9fc2-37f4735d3b48)
+![App Screenshot 2](https://github.com/user-attachments/assets/13130aa9-3c9e-4cea-9fc3-b419b057ac27)
 
-## Screenshots
-
-![crypto-2](https://github.com/user-attachments/assets/1c3ea359-693a-4424-9fc2-37f4735d3b48)
-![crypto-1](https://github.com/user-attachments/assets/13130aa9-3c9e-4cea-9fc3-b419b057ac27)
-
-## Demo Video
-
-[Watch on YouTube](https://youtu.be/uTbP4lnBDpk)
-
----
+## Live Demo
+[Watch Demo Video on YouTube](https://youtu.be/uTbP4lnBDpk) | [Try Live Version](https://crypto-tracker-sable-iota.vercel.app)
 
 ## Features
-
 * Real-time cryptocurrency price tracking
-* Historical price charts for each coin
-* Sorting and filtering capabilities
+* Historical price charts (30-day view)
+* Sorting by market cap, price, and 24h change
 * Light/Dark theme toggle
-* Favorites system
-* Fully responsive for all device sizes
+* Favorites system (local storage)
+* Responsive design for all devices
 
----
+## Setup Instructions (Local Development)
 
-## Docker Deployment
+### 1. Get Your API Key
+1. Visit [CoinRanking API on RapidAPI](https://rapidapi.com/Coinranking/api/coinranking1/)
+2. Click "Subscribe" to get your free API key
+3. Copy your key from the RapidAPI dashboard
 
-### Image Details
-
-* **Docker Hub Repository**: [`rurangajabes/cryptotracker`](https://hub.docker.com/r/rurangajabes/cryptotracker)
-* **Tags**: `latest`, `v1`
-
-### Build Instructions (Local)
-
+### 2. Install and Run
 ```bash
-docker build -t rurangajabes/cryptotracker:v1 .
-```
+# 1. Clone the repository
+git clone https://github.com/yourusername/cryptotracker-pro.git
+cd cryptotracker-pro
 
-### Run Locally
-
-```bash
-docker run -p 8080:8080 -e API_KEY=your_api_key rurangajabes/cryptotracker:v1
-```
-
-To verify:
-
-```bash
-curl http://localhost:8080
-```
-
----
-
-## Deployment on Lab Machines
-
-### 1. SSH into the Machines
-
-```bash
-# Web Server 1
-ssh ubuntu@localhost -p 2211
-
-# Web Server 2
-ssh ubuntu@localhost -p 2212
-```
-
-### 2. Pull & Run the Docker Image
-
-```bash
-docker pull rurangajabes/cryptotracker:latest
-
-docker run -d --name app --restart unless-stopped \
-  -p 8080:8080 \
-  -e API_KEY=your_api_key \
-  rurangajabes/cryptotracker:v1
-```
-
-### 3. Verify Each Instance
-
-```bash
-curl http://web-01:8080
-curl http://web-02:8080
-```
-
----
-
-## Load Balancer Setup
-
-### 1. SSH into Load Balancer
-
-```bash
-ssh ubuntu@localhost -p 2210
-```
-
-### 2. Edit `/etc/haproxy/haproxy.cfg`
-
-```cfg
-backend webapps
-  balance roundrobin
-  server web01 172.20.0.11:8080 check
-  server web02 172.20.0.12:8080 check
-  http-response set-header X-Served-By %[srv_name]
-```
-
-### 3. Reload HAProxy
-
-```bash
-haproxy -sf $(pidof haproxy) -f /etc/haproxy/haproxy.cfg
-```
-
-### 4. Test Load Balancing
-
-```bash
-curl -I http://localhost:8082
-```
-
-Make multiple requests and observe the `X-Served-By` header alternating between `web01` and `web02`.
-
----
-
-## API Usage
-
-CryptoTracker Pro uses the **CoinRanking API** (through a proxy server) to:
-
-* Fetch cryptocurrency listings
-* Retrieve individual coin information
-* Fetch historical price data
-
-**Note:** The API key is injected via environment variables.
-
----
-
-## Security Considerations
-
-* API keys are not hardcoded; they are passed as environment variables.
-* For production deployments, consider using a secrets management solution like **Vault**, **AWS Secrets Manager**, or **Docker secrets**.
-
----
-
-## Development Setup
-
-### Prerequisites
-
-* **Node.js v16+**
-* **npm** or **yarn**
-
-### Installation
-
-```bash
+# 2. Install dependencies
 npm install
-```
 
-### Run Locally
+# 3. Create .env file
+echo "API_KEY=your_rapidapi_key_here" > .env
 
-```bash
+# 4. Start the development server
 npm start
-```
+3. Access the Application
+Open your browser and visit:
+http://localhost:8080
 
-Visit: [http://localhost:8080](http://localhost:8080)
+Important Notes
+You must run the Node.js server - simply opening index.html won't work
 
----
+The server is required to:
 
-## Troubleshooting
+Load environment variables securely
 
-* Ensure your API key is set correctly with `-e API_KEY=...`
+Proxy API requests
 
-* View logs with:
+Enable all application features
 
-  ```bash
-  docker logs <container_id>
-  ```
+Troubleshooting
+If you see "Failed to fetch" errors:
 
-* Check that port `8080` is not already in use.
+Verify your API key in .env matches your RapidAPI key
 
----
+Ensure the server is running (npm start)
 
-## License
+Check for errors in the terminal where you ran npm start
 
-This project is for educational and demonstration purposes.
+Make sure you're accessing http://localhost:8080 not just the HTML file
+
+Security Reminder
+Never commit your .env file to GitHub
+
+Your API key will only be used locally
+
+For production use, consider proper secret management
+
+Screenshots
+https://github.com/user-attachments/assets/1c3ea359-693a-4424-9fc2-37f4735d3b48
+https://github.com/user-attachments/assets/13130aa9-3c9e-4cea-9fc3-b419b057ac27
