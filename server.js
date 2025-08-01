@@ -99,5 +99,11 @@ if (process.env.VERCEL !== '1') {
     console.log(`API Key configured: ${!!process.env.API_KEY}`);
   });
 }
-
 module.exports = app;
+
+// Start server only locally (not on Vercel)
+if (process.env.VERCEL !== '1') {
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
+}
