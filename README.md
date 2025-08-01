@@ -24,8 +24,8 @@
 ### 2. Install and Run
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/cryptotracker-pro.git
-cd cryptotracker-pro
+git clone https://github.com/n-ruranga/crypto-tracker.git
+cd crypto-tracker
 
 # 2. Install dependencies
 npm install
