@@ -5,12 +5,11 @@ const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fet
 
 
 const app = express();
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 8080;
 
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
-console.log('API KEY:', process.env.API_KEY);
-console.log('PORT:', process.env.PORT);
+
 // API proxy endpoints
 app.get('/api/coins', async (req, res) => {
   try {
